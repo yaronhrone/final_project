@@ -1,0 +1,22 @@
+.img-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+.img {
+    width: 100%; 
+    height: 300px;
+}
+.icon {
+    width: 40%;
+    height:100%;
+    position: absolute;
+    top: 0;
+    right:  0;
+    opacity: calc(1 - 0.5);
+    transition: opacity 0.3s ease-in-out;
+}
+.icon:hover {
+    opacity: 1;
+}

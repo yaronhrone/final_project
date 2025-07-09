@@ -4,7 +4,6 @@
   padding: 24px;
   background-color: #000000d3;
   border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
   text-align: center;
 }
 
@@ -19,23 +18,13 @@
 
 }
 .login-container input {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 12px;
   border-radius: 8px;
-  border: 1px solid #ccc;
   font-size: 16px;
 }
-.sign-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 12px;
-  border-radius: 8px;
-  border: 1px solid #ff9100;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #ffffff;
-}
+
 
 .sign-btn:hover {
   background-color: #5a6268;

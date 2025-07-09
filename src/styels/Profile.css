@@ -2,6 +2,7 @@
   max-width: 700px;
   margin: 10px auto;
   background-color: black;
+  border: #ffffff 2px solid;
 }
 .profile-form h4 , h1 {
   font-size: 1.5rem;
@@ -42,12 +43,10 @@
 }
 
 .form-input:disabled {
-  background-color: #f4f4f4;
+  background-color: #b6b5b5;
 }
 
-.input-error {
-  border: 1px solid red;
-}
+
 
 .error-text {
   color: red;
@@ -56,12 +55,12 @@
 
 .edit-btn, .save-btn, .delete-btn {
   font-size: 1rem;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 1rem;
   color: white;
   width: 120px;
+  height: 40px;
 }
 
 .edit-btn {

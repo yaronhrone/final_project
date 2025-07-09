@@ -77,7 +77,7 @@ function Items({searchTerm}) {
           isAddFavoriteItem={isAddFavoriteItem[item.id]}
         />
       ))
-      : <h1>There is no items found</h1> } 
+      : <h1 style={{color:"black"}}>There is no items found</h1> } 
     </div>
 
 

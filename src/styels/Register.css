@@ -3,12 +3,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 400px;
+    max-width: 500px;
     margin: 20px auto;
     padding: 20px;
     background-color: #000000;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px;
   }
   
   .register-form h2 {
@@ -17,7 +17,7 @@
   }
   
   .register-form input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin-bottom: 12px;
     border-radius: 8px;
@@ -30,7 +30,6 @@
     padding: 10px 20px;
     background-color: #0c8be0;
     color: #fff;
-    border: none;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
@@ -41,19 +40,7 @@
     background-color: #2980b9;
    
   } 
-  p{
-    color: #ffffff;
-  }
-.sing-in{
-    width: 20%;
-  margin: 10px;
-  padding: 10px 20px;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
+
 .error-text{
   color: red;
 }

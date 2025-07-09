@@ -123,7 +123,7 @@ const  RegisterForm = () => {
           className={error.username ? "inpur-error" : ""} />
         {error.username && <p className='error'>{error.username}</p>}
 
-        <div style={{ position: "relative", marginBottom: "1rem", width: "100%" ,marginRight:"1rem"}}>
+        <div style={{ position: "relative", marginBottom: "1rem", width: "90%" ,marginRight:"1rem"}}>
           <input type={showPassword ? 'text' : 'password'} placeholder="Password" name='password'
             value={formData.password} onChange={handleChange} className={error.password ? "input=error" : ""}
             style={{ width: "100%", paddingRight: "0", paddingLeft: "0.5rem", marginBottom: "0" }} />

@@ -32,7 +32,7 @@ const Navbar = ({ onSearch }) => {
       <CloseIcon onClick={handleCleen} style={{ cursor: "pointer" , color: "white" }}/>
       </div>
       <div className='navbar-links'>
-       {currentUser && <h5>Welcome <span style={{ color: "green" }}>{currentUser.username}</span></h5>}
+       {currentUser && <h5>Welcome  <span style={{ color: "green" }}>{currentUser.username}</span></h5>}
         {(isRequstToGetCurrentUserDone && !currentUser) &&
           <div >
             <CoustomLink to={'/login'}>Sing in</CoustomLink>
@@ -43,7 +43,7 @@ const Navbar = ({ onSearch }) => {
             <CoustomLink to= {'/favorites'}>Favorites</CoustomLink>
             <CoustomLink to= {'/orders'}>Orders</CoustomLink>
             <CoustomLink to={'/profile'}>Profile</CoustomLink>
-            <CoustomLink to={'/'} onClick={loguot}>Log out</CoustomLink>
+            <CoustomLink to={'/logout'} onClick={loguot}>Logout</CoustomLink>
           </div>
           }
       </div>

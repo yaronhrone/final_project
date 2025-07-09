@@ -119,22 +119,22 @@ function Profile() {
               <form onSubmit={handleSumbmit}>
                 <div className='form-group'>
                   <label htmlFor="first_name">First Name:</label>
-                  <input type="text" id="first_name" name="first_name" value={formDate?.first_name} onChange={handleChange} disabled={!isEdinting} />
+                  <input type="text" id="first_name" name="first_name"  className='form-input' value={formDate?.first_name} onChange={handleChange} disabled={!isEdinting} />
                   {error.first_name && <p className="error">{error.first_name}</p>}
                 </div>
                 <div className='form-group'>
                   <label htmlFor="last_name">Last Name:</label>
-                  <input type="text" id="last_name" name="last_name" value={formDate?.last_name} onChange={handleChange} disabled={!isEdinting} />
+                  <input type="text" id="last_name" name="last_name" className='form-input' value={formDate?.last_name} onChange={handleChange} disabled={!isEdinting} />
                   {error.last_name && <p className="error">{error.last_name}</p>}
                 </div>
                 <div className='form-group'>
                   <label htmlFor="phone">Phone:</label>
-                  <input type="tel" id="phone" name="phone" value={formDate?.phone} onChange={handleChange} disabled={!isEdinting} />
+                  <input type="tel" id="phone" name="phone" className='form-input' value={formDate?.phone} onChange={handleChange} disabled={!isEdinting} />
                   {error.phone && <p className="error">{error.phone}</p>}
                 </div>
                 <div className='form-group'>
                   <label htmlFor="address">Address:</label>
-                  <input type="text" id="address" name="address" value={formDate?.address} onChange={handleChange} disabled={!isEdinting} />
+                  <input type="text" className='form-input' id="address" name="address" value={formDate?.address} onChange={handleChange} disabled={!isEdinting} />
                   {error.address && <p className="error">{error.address}</p>}
                 </div>
                 {errorFromServer && <p className="error">{errorFromServer}</p>}

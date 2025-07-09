@@ -26,33 +26,18 @@
   border: 1px solid #ccc;
   font-size: 16px;
 }
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-button {
-  flex: 1;
+.sign-btn {
+  width: 100%;
   padding: 10px;
-  border: none;
+  margin-top: 12px;
   border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
+  border: 1px solid #ff9100;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: #ffffff;
 }
 
-.signin-btn {
-  background-color: #147ad3;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-.signin-btn:hover {
+.sign-btn:hover {
   background-color: #5a6268;
 }
 .error {

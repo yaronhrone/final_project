@@ -6,6 +6,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const  RegisterForm = () => {
   const navigate = useNavigate();
+  const [singUp, setSingUp] = useState(false);
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -36,7 +37,11 @@ const  RegisterForm = () => {
       console.log(formData);
       
       await register(formData);
+      setSingUp(true);
+      setTimeout(() => {
+      setSingUp(false);
       navigate('/login');
+      },2000)
     } catch (error) {
       console.error(error);
       if (error.status == 400 || error.status == 500) {
@@ -95,7 +100,12 @@ const  RegisterForm = () => {
   }, [error])
 
   return (
-    <div>
+<>
+    {singUp ? <h3 className='success'>You have successfully registered!</h3> :
+    <div className='register-container'>
+      {errorFromServer && <p className='error-text'>{errorFromServer}</p>}
+      <div>
+    </div>
       <form  onSubmit={handleSumbmit} className='register-form'>
         <h2>Sing up</h2>
         <input type="text" placeholder='First name' name='first_name'
@@ -141,10 +151,10 @@ const  RegisterForm = () => {
         {errorFromServer && <p className='error-text'>{errorFromServer}</p>}
 
         <button type='sumbit' className="sing-up" disabled={!isFormValid}>Sing up</button>
-        {/* <p>Already have an account?</p> */}
-        {/* <button className='sing-in' type='button' onClick={() => navigate('/login')}>Click here to Sing in</button> */}
+   
       </form>
-    </div>
+    </div>}
+  </>
   )
 }
 

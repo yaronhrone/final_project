@@ -73,10 +73,8 @@ function LoginFrom() {
         </div>
         {error && <p className='error'>{error}</p>}
 
-        <div className='button-group'>
-          <button type='submit' className='singin-btn'>Sing In</button>
-          {/* <button type="button" onClick={() => navigate("/register")} className='singup-btn'>Sing Up</button> */}
-        </div>
+          <button type='submit' className='sing-up'>Sing In</button>
+      
     </form>
 
   )

@@ -1,13 +1,15 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import '../styels/Order.css';
 import OrderComp from '../components/OrderComp'
+import UserContext from '../contexts/UserContext';
 
 const Order = () => {
+  const { currentUser, isRequstToGetCurrentUserDone } = useContext(UserContext);
   return (
     <div>
-       {/* <OrderTemp/> */}
+      { (isRequstToGetCurrentUserDone && currentUser) &&
        <OrderComp/>
-     
+      }
     </div>
   )
 }

@@ -1,14 +1,15 @@
 import React, {  useContext, useEffect, useState } from 'react'
 import UserContext from '../contexts/UserContext';
 import { addItem,  getFavoriteItems, getFavoriteItemsBySearch, removeItemFromFavorite } from '../service/APIService';
-import Itemn from '../components/Itemn';
+import Item from '../components/Item';
 import { useNavigate } from 'react-router-dom';
+
 
 const Favorite = ({searchTerm}) => {
     const { currentUser , isRequstToGetCurrentUserDone } = useContext(UserContext);
     const [favoriteItems, setFavoriteItems] = useState([]);
     const  navigate = useNavigate();
-    const [isFavoriteItem ] = useState(false);
+    const [isFavoriteItem ] = useState(true);
 
     const fetchFavoriteItems = async () => {
         console.log("fetchFavoriteItems called with searchTerm:", searchTerm);
@@ -54,13 +55,13 @@ const Favorite = ({searchTerm}) => {
      },[searchTerm]);
   return (
     <div >
-        <h1>Your Favorite Items</h1>
+        <h1 className='title'>Your Favorite Items</h1>
 
         {(isRequstToGetCurrentUserDone && currentUser) ?
         <div className='container'>
         { favoriteItems.length > 0 ? (
           favoriteItems.map((item) => (
-            <Itemn
+            <Item
             key={item.id}
             item={item}
             removeFromFavorite={ () => removeTheItemToFavorite(item.id)}
@@ -69,7 +70,7 @@ const Favorite = ({searchTerm}) => {
             />
           ))
         ) : (
-          <p>You don't have favorite items found</p>
+          <p className='no-items'> You don't have favorite items found</p>
         ) }
 
         </div>

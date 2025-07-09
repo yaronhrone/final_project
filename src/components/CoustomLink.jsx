@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Link, useMatch, useResolvedPath } from 'react-router-dom'
-import '../styels/coustomLink.css';
+import '../styels/CoustomLink.css';
 const CoustomLink = ({ to, children , ...rest}) => {
     const { pathname } = useResolvedPath(to);
     const isActive = useMatch({ path: pathname, end: true });

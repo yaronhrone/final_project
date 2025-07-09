@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import { getAllItem, addItemToFavorite,  searchItems } from '../service/APIService';
 import { useState } from 'react';
 import '../styels/Items.css';
-import UserContext from '../contexts/UserContext';
-import Itemn from './Itemn';
+import Item from './Item';
 function Items({searchTerm}) {
   // const { currentUser } = useContext(UserContext);
   const [items, setItems] = useState([]);
@@ -63,7 +62,6 @@ function Items({searchTerm}) {
 
 
   useEffect(() => {
-    
     getItems();
   }, [searchTerm]);
   return (
@@ -71,7 +69,7 @@ function Items({searchTerm}) {
    
 { items.length > 0 ? (
       items.map(item =>
-        <Itemn
+        <Item
           key={item.id}
           item={item}
           editToFavorite={() => addTheItemToFavorite(item.id)}

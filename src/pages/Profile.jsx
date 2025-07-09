@@ -12,7 +12,6 @@ function Profile() {
   const [error, setError] = useState({});
   const [errorFromServer, setErrorFromServer] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const phoneRegex = /^[0-9]{10}$/;
   const addressRegex = /^[A-Za-z0-9\u0590-\u05FF\s,.'-]{5,100}$/;
   const firstAndLastNameRegex = /^[A-Za-z\u0590-\u05FF]{2,30}$/;
@@ -22,8 +21,6 @@ function Profile() {
     let error = "";
     if (!value.trim() && ['first_name', 'last_name', 'email', 'phone', 'address'].includes(name)) {
       error = `${name.replace('_', ' ')} is required`;
-    } else if (name == 'email' && !emailRegex.test(value)) {
-      error = 'Invalid email address';
     } else if (name == 'phone' && !phoneRegex.test(value)) {
       error = 'Phone number must be a 10-digit number';
     } else if (name === 'address' && !addressRegex.test(value)) {
@@ -116,9 +113,10 @@ function Profile() {
         <div>
           {(formDate && !isDeleteAccount) &&
             <div className='profile-form'>
-              <h2>Your Profile</h2>
-              <form onSubmit={handleSumbmit}>
+              <h1>Your Profile</h1>
                 <h4>Username: {currentUser.username}</h4>
+                 <h4>Email: {currentUser.email} </h4>
+              <form onSubmit={handleSumbmit}>
                 <div className='form-group'>
                   <label htmlFor="first_name">First Name:</label>
                   <input type="text" id="first_name" name="first_name" value={formDate?.first_name} onChange={handleChange} disabled={!isEdinting} />
@@ -128,11 +126,6 @@ function Profile() {
                   <label htmlFor="last_name">Last Name:</label>
                   <input type="text" id="last_name" name="last_name" value={formDate?.last_name} onChange={handleChange} disabled={!isEdinting} />
                   {error.last_name && <p className="error">{error.last_name}</p>}
-                </div>
-                <div className='form-group'>
-                  <label htmlFor="email">Email:</label>
-                  <input type="email" id="email" name="email" value={formDate?.email} onChange={handleChange} disabled={!isEdinting} />
-                  {error.email && <p className="error">{error.email}</p>}
                 </div>
                 <div className='form-group'>
                   <label htmlFor="phone">Phone:</label>
@@ -153,7 +146,7 @@ function Profile() {
           }
           {isDeleteAccount ? <p className="error">Your Account Is deleted</p>
           : <button type="button" className='delete-btn' onClick={handleDeleteAccount}>Delete Account</button>
-          }
+        }
         </div>
       }
       {(isRequstToGetCurrentUserDone && !currentUser && !isDeleteAccount) &&

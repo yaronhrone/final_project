@@ -57,3 +57,6 @@
 .error-text{
   color: red;
 }
+.success {
+  color: green;
+  font-size: 30px;}

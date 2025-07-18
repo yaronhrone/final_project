@@ -12,8 +12,6 @@ const Favorite = ({ searchTerm }) => {
   const [isFavoriteItem] = useState(true);
 
   const fetchFavoriteItems = async () => {
-    console.log("fetchFavoriteItems called with searchTerm:", searchTerm);
-
     try {
       if (searchTerm.trim() !== '') {
         const { data } = await getFavoriteItemsBySearch(searchTerm);
@@ -27,7 +25,7 @@ const Favorite = ({ searchTerm }) => {
       setFavoriteItems(data);
 
     } catch (error) {
-      console.error('Error fetching favorite items:', error);
+      console.error(error);
     }
   }
 
@@ -35,7 +33,6 @@ const Favorite = ({ searchTerm }) => {
     try {
       removeItemFromFavorite(itemsId);
       setFavoriteItems((favoriteItems) => favoriteItems.filter((item) => item.id !== itemsId));
-      console.log(itemsId);
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +41,6 @@ const Favorite = ({ searchTerm }) => {
   const addTheItemToOrder = (itemsId) => {
     try {
       addItem(itemsId);
-      console.log(itemsId);
     } catch (error) {
       console.log(error);
     }
@@ -55,9 +51,9 @@ const Favorite = ({ searchTerm }) => {
   }, [searchTerm]);
   return (
     <div >
-      <h1 style={{ color: "black" }}>Your Favorite Items</h1>
-      {(isRequstToGetCurrentUserDone && currentUser) ?
-
+      {(isRequstToGetCurrentUserDone && currentUser) &&
+      <div>
+          <h1 className='title'>Your Favorite Items</h1>
         <div className='container'>
           {favoriteItems.length > 0 ? (
             favoriteItems.map((item) => (
@@ -74,8 +70,10 @@ const Favorite = ({ searchTerm }) => {
           )}
 
         </div>
+        </div>}
 
-        :
+        {
+        (isRequstToGetCurrentUserDone && !currentUser) &&
         <div className='center'>
           <h2>Unauthorized Access</h2>
           <h3>You need to login to access this page.</h3>

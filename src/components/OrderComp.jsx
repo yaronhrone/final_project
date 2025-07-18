@@ -15,6 +15,7 @@ const OrderComp = () => {
   const [currentClosedOrderIndex, setCurrentClosedOrderIndex] = useState(0);
   const [currentProductIndexClosed, setCurrentProductIndexClosed] = useState(0);
  const [ isFromOrder, setIsFromOrder] = useState(true);
+ const [orderSend, setOrderSend] = useState("");
   const fetchOrdersTemp = async () => {
     try {
       const { data } = await getOrderTempStatuse();
@@ -47,7 +48,6 @@ const OrderComp = () => {
 
   const handleAdd = async (itemId) => {
     await addItem(itemId);
-    console.log("Item added to order:", itemId);
     
     fetchOrdersTemp();
   };
@@ -61,7 +61,6 @@ const OrderComp = () => {
     
       return;
     }else
-    console.log("Item removed from order:", itemId);
     fetchOrdersTemp();
   };
   useEffect(() => {
@@ -77,7 +76,10 @@ const OrderComp = () => {
     openOrder.status = 'CLOSE';
     closedOrders.push(openOrder);
     setOpenOrder(null);
-    console.log(closedOrders);
+    setOrderSend("Order has been sent successfully");
+    setTimeout(() => {
+      setOrderSend("");
+    }, 5000);
   };
   const goNextProductOpenOrder = () => {
     setCurrentProductIndexOpen((prev) => (prev + 1) % openOrder.items.length);
@@ -105,6 +107,7 @@ const OrderComp = () => {
     <>
       {(isRequstToGetCurrentUserDone && currentUser) ?
         <div >
+          {orderSend && <div className='order-send'>{orderSend}</div>}
           <h2>Open Order</h2>
 
           {openOrder ? (

@@ -47,7 +47,7 @@
   padding: 8px 16px;
   border-radius: 10%;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease-in-out;
   margin: 0 10px;
 
 }
@@ -68,6 +68,7 @@
   color: #00ff4c;
   width: 200px;
   height: 60px;
+  transition: background-color 0.3s ease-in-out;
 }
 .send-btn:hover {
   background-color: #5a59597c;
@@ -77,4 +78,27 @@
   color: #000000;
   font-weight: bold;
 }
-
+.order-send {
+  background-color: #000000;
+  color: #00ff4c;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 32px;
+  text-align: center;
+  margin: 10px auto;
+ 
+}
+@media (max-width: 768px) {
+  .container-order {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-slider {
+    flex-direction: column;
+    align-items: center;
+  }
+  .slider-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+}

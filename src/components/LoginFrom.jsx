@@ -29,12 +29,10 @@ function LoginFrom() {
       return;
     }
     try {
-      console.log(username + " " + password);
       await login({ username: username, password: password });
       console.log("login success");
       
       const { data } = await fetchCurrentUser();
-      console.log(data+ "login data");
       
       updateCurrentUserContext(data);
       navigate("/");
@@ -42,7 +40,6 @@ function LoginFrom() {
       console.dir(error);
 
       if (error.status === 403 || error.status == 500) {
-        console.log(error.response.data);
 
         setError(error.response.data);
       }
@@ -59,7 +56,7 @@ function LoginFrom() {
   return (
     <form onSubmit={handleLogin} className='login-container'>
      
-        <h2>Sing In</h2>
+        <h2>Sign In</h2>
         <input type="text" placeholder='User Name' name='username' onChange={(e) => setUsername(e.target.value)} />
 
         <div style={{ position: 'relative', marginBottom: "1rem" }}>
@@ -73,7 +70,7 @@ function LoginFrom() {
         </div>
         {error && <p className='error'>{error}</p>}
 
-          <button type='submit' className='sing-up'>Sing In</button>
+          <button type='submit' className='sign-in'>Sign In</button>
       
     </form>
 

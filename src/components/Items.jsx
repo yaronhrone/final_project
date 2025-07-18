@@ -44,7 +44,6 @@ function Items({searchTerm}) {
       
       return await addItemToFavorite(itemId);
     } catch (error) {
-      console.log(error.response.data);
       setErrorItem(prev => ({
         ...prev,
         [itemId]: error.response.data

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import  UserContext  from '../contexts/UserContext';
 import { removeAuthHeader} from '../service/APIService';
@@ -8,6 +8,15 @@ import CloseIcon from '@mui/icons-material/Close';
 const Navbar = ({ onSearch }) => {
   const { currentUser, updateCurrentUserContext, isRequstToGetCurrentUserDone } = useContext(UserContext);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
   const handleChange = (e) => {
     onSearch(e.target.value);
   }
@@ -17,6 +26,7 @@ const Navbar = ({ onSearch }) => {
   }
 
   const loguot = () => {
+    closeMenu();
     setTimeout(() => {
       removeAuthHeader();
       updateCurrentUserContext(null);
@@ -26,24 +36,26 @@ const Navbar = ({ onSearch }) => {
 
   return (
     <div className='navbar'>
-      <CoustomLink to={"/"} className='navbar-logo'><img src="https://bcassetcdn.com/social/6ru57xswrs/preview.png" width={"200px"} height={"100px"} alt="logo" /></CoustomLink>
-      <div className='navbar-search-container'>
+      <CoustomLink to={"/"} ><img src="https://bcassetcdn.com/social/6ru57xswrs/preview.png" alt="logo"  className='navbar-logo'/></CoustomLink>
+      <div className="navbar-search-container">
       <input className='navbar-search' type="text" placeholder='Search Perfume' onChange={handleChange} /> 
       <CloseIcon onClick={handleCleen} style={{ cursor: "pointer" , color: "white" }}/>
       </div>
-      <div className='navbar-links'>
+           <div className="hamburger" onClick={toggleMenu}>☰</div>
+      <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
+        
        {currentUser && <h5>Welcome  <span style={{ color: "green" }}>{currentUser.username}</span></h5>}
         {(isRequstToGetCurrentUserDone && !currentUser) &&
-          <div >
-            <CoustomLink to={'/login'}>Sing in</CoustomLink>
-            <CoustomLink to={'/register'}>Sing up</CoustomLink>
+          <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
+            <CoustomLink to={'/login'} onClick={closeMenu}>Sign in</CoustomLink>
+            <CoustomLink to={'/register'}onClick={closeMenu}>Sign up</CoustomLink>
           </div>}
           {currentUser && 
-          <div>
-            <CoustomLink to= {'/favorites'}>Favorites</CoustomLink>
-            <CoustomLink to= {'/orders'}>Orders</CoustomLink>
-            <CoustomLink to={'/profile'}>Profile</CoustomLink>
-            <CoustomLink to={'/logout'} onClick={loguot}>Logout</CoustomLink>
+          <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
+            <CoustomLink to= {'/favorites'}onClick={closeMenu}>Favorites</CoustomLink>
+            <CoustomLink to= {'/orders'}onClick={closeMenu}>Orders</CoustomLink>
+            <CoustomLink to={'/profile'}onClick={closeMenu}>Profile</CoustomLink>
+            <CoustomLink to={'/'} onClick={loguot}>Logout</CoustomLink>
           </div>
           }
       </div>

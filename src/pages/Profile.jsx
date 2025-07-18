@@ -107,19 +107,19 @@ function Profile() {
   }
 
   return (
+    <>
+      {(currentUser && isRequstToGetCurrentUserDone) &&
+        <div className='profile-container'>
 
-    <div className='profile-container'>
-      {currentUser &&
-        <div>
           {(formDate && !isDeleteAccount) &&
             <div className='profile-form'>
               <h1>Your Profile</h1>
-                <h4>Username: {currentUser.username}</h4>
-                 <h4>Email: {currentUser.email} </h4>
+              <h4>Username: {currentUser.username}</h4>
+              <h4>Email: {currentUser.email} </h4>
               <form onSubmit={handleSumbmit}>
                 <div className='form-group'>
                   <label htmlFor="first_name">First Name:</label>
-                  <input type="text" id="first_name" name="first_name"  className='form-input' value={formDate?.first_name} onChange={handleChange} disabled={!isEdinting} />
+                  <input type="text" id="first_name" name="first_name" className='form-input' value={formDate?.first_name} onChange={handleChange} disabled={!isEdinting} />
                   {error.first_name && <p className="error">{error.first_name}</p>}
                 </div>
                 <div className='form-group'>
@@ -145,19 +145,19 @@ function Profile() {
             </div>
           }
           {isDeleteAccount ? <p className="error">Your Account Is deleted</p>
-          : <button type="button" className='delete-btn' onClick={handleDeleteAccount}>Delete Account</button>
-        }
+            : <button type="button" className='delete-btn' onClick={handleDeleteAccount}>Delete Account</button>
+          }
         </div>
       }
       {(isRequstToGetCurrentUserDone && !currentUser && !isDeleteAccount) &&
-        <div className='center'>
+        <div >
           <h2>Unauthorized Access</h2>
           <h3>You need to login to access this page.</h3>
           <button className='login-btn' onClick={() => navigate("/login")}>Login</button>
         </div>
       }
 
-    </div>
+    </>
   )
 }
 

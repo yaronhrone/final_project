@@ -4,12 +4,9 @@ import OrderComp from '../components/OrderComp'
 import UserContext from '../contexts/UserContext';
 
 const Order = () => {
-  const { currentUser, isRequstToGetCurrentUserDone } = useContext(UserContext);
   return (
     <div>
-      { (isRequstToGetCurrentUserDone && currentUser) &&
        <OrderComp/>
-      }
     </div>
   )
 }

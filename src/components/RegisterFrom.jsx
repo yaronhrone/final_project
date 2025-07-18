@@ -34,8 +34,6 @@ const  RegisterForm = () => {
     e.preventDefault();
     if (!isFormValid) return;
     try {
-      console.log(formData);
-      
       await register(formData);
       setSingUp(true);
       setTimeout(() => {
@@ -103,11 +101,11 @@ const  RegisterForm = () => {
 <>
     {singUp ? <h3 className='success'>You have successfully registered!</h3> :
     <div className='register-container'>
-      {errorFromServer && <p className='error-text'>{errorFromServer}</p>}
+
       <div>
     </div>
       <form  onSubmit={handleSumbmit} className='register-form'>
-        <h2>Sing up</h2>
+        <h2>Sign up</h2>
         <input type="text" placeholder='First name' name='first_name'
           value={formData.first_name} onChange={handleChange}
           className={error.first_name ? "inpur-error" : ""} />
@@ -150,7 +148,7 @@ const  RegisterForm = () => {
 
         {errorFromServer && <p className='error-text'>{errorFromServer}</p>}
 
-        <button type='sumbit' className="sing-up" disabled={!isFormValid}>Sing up</button>
+        <button type='sumbit' className="sign-up" disabled={!isFormValid}>Sign up</button>
    
       </form>
     </div>}

@@ -12,8 +12,7 @@ import Order from './pages/Order';
 import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import { fetchCurrentUser } from './service/APIService';
-import Items from './components/Items';
-import { dividerClasses } from '@mui/material';
+
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isRequstToGetCurrentUserDone, setIsRequstToGetCurrentUserDone] = useState(false);

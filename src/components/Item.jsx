@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { addItem } from '../service/APIService';
 import UserContext from '../contexts/UserContext';
 import AddReactionIcon from '@mui/icons-material/AddReaction';

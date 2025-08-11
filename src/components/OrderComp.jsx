@@ -14,17 +14,19 @@ const OrderComp = () => {
   const [closedOrders, setClosedOrders] = useState([]);
   const [currentClosedOrderIndex, setCurrentClosedOrderIndex] = useState(0);
   const [currentProductIndexClosed, setCurrentProductIndexClosed] = useState(0);
- const [ isFromOrder, setIsFromOrder] = useState(true);
- const [orderSend, setOrderSend] = useState("");
+  const [isFromOrder, setIsFromOrder] = useState(true);
+  const [orderSend, setOrderSend] = useState("");
+  const [error, setError] = useState('');
   const fetchOrdersTemp = async () => {
     try {
       const { data } = await getOrderTempStatuse();
       if (data && data.items && data.items.length >= 0) {
         setOpenOrder(data);
-    
-      }else {
-      setOpenOrder([]);
-      return ;}
+
+      } else {
+        setOpenOrder([]);
+        return;
+      }
 
     } catch (error) {
       console.error(error);
@@ -47,9 +49,17 @@ const OrderComp = () => {
   }, []);
 
   const handleAdd = async (itemId) => {
+    try {
     await addItem(itemId);
-    
     fetchOrdersTemp();
+    } catch (error) {
+      console.error(error);
+      setError(error.response.data);
+      setTimeout(() => {
+        setError('');
+      }, 2000);
+      
+    }
   };
 
   const handleRemove = async (itemId) => {
@@ -58,16 +68,16 @@ const OrderComp = () => {
     if (currentItem && currentItem.quantity == 1 && openOrder.items.length == 1) {
 
       setOpenOrder(null);
-    
+
       return;
-    }else
-    fetchOrdersTemp();
+    } else
+      fetchOrdersTemp();
   };
   useEffect(() => {
-  if (openOrder && currentProductIndexOpen >= openOrder.items.length) {
-    setCurrentProductIndexOpen(Math.max(0, openOrder.items.length - 1));
-  }
-}, [openOrder, currentProductIndexOpen]);
+    if (openOrder && currentProductIndexOpen >= openOrder.items.length) {
+      setCurrentProductIndexOpen(Math.max(0, openOrder.items.length - 1));
+    }
+  }, [openOrder, currentProductIndexOpen]);
 
 
   const handleSendOrder = async () => {
@@ -125,26 +135,27 @@ const OrderComp = () => {
                   <button onClick={goNextProductOpenOrder} className='slider-btn'>
                     <FaArrowLeft />
                   </button>
-                  </div>
-              <div className='product'>
+                </div>
+                <div className='product'>
                   <p className='order-number'>Item {currentProductIndexOpen + 1} of {openOrder.items.length}</p>
-                <Item
-                  key={openOrder.items[currentProductIndexOpen].id}
-                  item={openOrder.items[currentProductIndexOpen]}
-                  quantity={openOrder.items[currentProductIndexOpen].quantity}
-                  handleAddOrder={handleAdd}
-                  handleRemoveOrder={handleRemove}
-                  isFromOrder={isFromOrder}
+                  <Item
+                    key={openOrder.items[currentProductIndexOpen].id}
+                    item={openOrder.items[currentProductIndexOpen]}
+                    quantity={openOrder.items[currentProductIndexOpen].quantity}
+                    handleAddOrder={handleAdd}
+                    handleRemoveOrder={handleRemove}
+                    isFromOrder={isFromOrder}
+                    error={error}
                   />
                 </div>
-                  <button onClick={goPrevProductOpenOrder} className='slider-btn'>
-                    <FaArrowRight />
-                  </button>
+                <button onClick={goPrevProductOpenOrder} className='slider-btn'>
+                  <FaArrowRight />
+                </button>
               </div>
-                <button className="send-btn" onClick={handleSendOrder}>Send Order</button>
-         
+              <button className="send-btn" onClick={handleSendOrder}>Send Order</button>
+
             </div>
-         
+
           ) : (
             <div>
               <h3 className="no-order">You don't have open order</h3>
@@ -153,9 +164,9 @@ const OrderComp = () => {
           <div className='line'></div>
           <h2 >Closed Orders</h2>
 
-              
-                { closedOrders.length > 0 && (
-                  <div>
+
+          {closedOrders.length > 0 && (
+            <div>
               <div className="closed-nav">
                 <button onClick={() => {
                   goNextCloseOrder();
@@ -167,46 +178,46 @@ const OrderComp = () => {
                   setCurrentProductIndexClosed(0);
                 }} className='slider-btn'><FaArrowRight /></button>
               </div>
-            <div className="container-order">
+              <div className="container-order">
 
-              <div className='order-info'>
+                <div className='order-info'>
 
-                <h4>Order ID: {closedOrders[currentClosedOrderIndex].id}</h4>
-                <h4>Status: {closedOrders[currentClosedOrderIndex].status}</h4>
-                <h4>Date Order: {closedOrders[currentClosedOrderIndex].date_order}</h4>
-                <h4>Shipping Address: {closedOrders[currentClosedOrderIndex].shipping_address}</h4>
-                <h4>Total Price: {closedOrders[currentClosedOrderIndex].total_price} $</h4>
-              </div>
-
-              {closedOrders[currentClosedOrderIndex].items.length > 0 && (
-                <div className="product-slider">
-                  <button onClick={goNextCloseProduct} className='slider-btn'>
-                    <FaArrowLeft />
-                  </button>
-                  <div className='product'>
-                  <p className='order-number'> Item {currentProductIndexClosed + 1} of {closedOrders[currentClosedOrderIndex].items.length}</p>
-                  <Item
-                    key={closedOrders[currentClosedOrderIndex].items[currentProductIndexClosed].id}
-                    item={closedOrders[currentClosedOrderIndex].items[currentProductIndexClosed]}
-                    quantity={closedOrders[currentClosedOrderIndex].items[currentProductIndexClosed].quantity}
-                    isFromOrderClose={true}
-                   
-                    />
-                    </div>
-                  <button onClick={goPrevCloseProduct} className='slider-btn'>
-                    <FaArrowRight />
-                  </button>
+                  <h4>Order ID: {closedOrders[currentClosedOrderIndex].id}</h4>
+                  <h4>Status: {closedOrders[currentClosedOrderIndex].status}</h4>
+                  <h4>Date Order: {closedOrders[currentClosedOrderIndex].date_order}</h4>
+                  <h4>Shipping Address: {closedOrders[currentClosedOrderIndex].shipping_address}</h4>
+                  <h4>Total Price: {closedOrders[currentClosedOrderIndex].total_price} $</h4>
                 </div>
-              )}
+
+                {closedOrders[currentClosedOrderIndex].items.length > 0 && (
+                  <div className="product-slider">
+                    <button onClick={goNextCloseProduct} className='slider-btn'>
+                      <FaArrowLeft />
+                    </button>
+                    <div className='product'>
+                      <p className='order-number'> Item {currentProductIndexClosed + 1} of {closedOrders[currentClosedOrderIndex].items.length}</p>
+                      <Item
+                        key={closedOrders[currentClosedOrderIndex].items[currentProductIndexClosed].id}
+                        item={closedOrders[currentClosedOrderIndex].items[currentProductIndexClosed]}
+                        quantity={closedOrders[currentClosedOrderIndex].items[currentProductIndexClosed].quantity}
+                        isFromOrderClose={true}
+
+                      />
+                    </div>
+                    <button onClick={goPrevCloseProduct} className='slider-btn'>
+                      <FaArrowRight />
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
           )}
           {closedOrders.length == 0 &&
             <div>
               <h3 className="no-order">You don't have closed orders</h3>
             </div>
           }
-          </div>
+        </div>
         :
         <div className='center'>
           <h2>Unauthorized Access</h2>

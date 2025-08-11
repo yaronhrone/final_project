@@ -66,7 +66,7 @@ const Favorite = ({ searchTerm }) => {
               />
             ))
           ) : (
-            <p style={{ color: "black" }}> You don't have favorite items found</p>
+            <p style={{ color: "black", fontSize: "24px", fontWeight: "bold" }}> You don't have favorite items found</p>
           )}
 
         </div>

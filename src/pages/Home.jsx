@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React  from 'react'
 import Items from '../components/Items'
 import '../styels/Home.css';
-import UserContext from '../contexts/UserContext';
+
 
 const Home = ({searchTerm}) => {
 

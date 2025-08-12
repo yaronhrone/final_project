@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React  from 'react'
+=======
+import React from 'react'
+>>>>>>> b30464e67c1189da7f3596dcaf12f9355def8a26
 import Items from '../components/Items'
 import '../styels/Home.css';
 
